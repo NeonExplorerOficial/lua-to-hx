@@ -1,0 +1,9 @@
+{
+  "name": "lua-to-hx",
+  "version": "0.1.0",
+  "description": "Conversor de scripts Lua a HScript (.hx) para Friday Night Funkin'",
+  "private": true,
+  "scripts": {
+    "test": "node test/run.js"
+  }
+}

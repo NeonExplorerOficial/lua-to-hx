@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>lua-to-hx · Conversor de Lua a HScript para FNF</title>
+  <meta name="description" content="Convierte scripts de Lua a HScript (.hx) para Friday Night Funkin' directamente en el navegador.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>lua-to-hx</h1>
+      <p class="sub">Convierte scripts de Lua a HScript para Friday Night Funkin'. Todo ocurre en tu navegador: no se sube nada.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls" aria-label="Opciones">
+      <label class="field">
+        <span>Motor de destino</span>
+        <select id="engine"></select>
+      </label>
+      <label class="field">
+        <span>Sangría</span>
+        <select id="indent">
+          <option value="4">4 espacios</option>
+          <option value="2">2 espacios</option>
+          <option value="tab">Tabulador</option>
+        </select>
+      </label>
+      <label class="check" title="Si está activo, 'if x then' se convierte a una comprobación fiel a Lua (x != null && x != false). Si lo desactivas queda 'if (x)', más corto pero solo correcto cuando x es booleano.">
+        <input type="checkbox" id="strict" checked>
+        <span>Condiciones fieles a Lua</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" id="header" checked>
+        <span>Comentario de cabecera</span>
+      </label>
+      <p id="engineInfo" class="engine-info"></p>
+    </section>
+
+    <section class="panes">
+      <div class="pane">
+        <div class="pane-head">
+          <h2>Lua</h2>
+          <div class="actions">
+            <label class="btn file">Abrir .lua<input type="file" id="file" accept=".lua,.txt,text/plain" hidden></label>
+            <button type="button" id="example" class="btn">Ejemplo</button>
+            <button type="button" id="clear" class="btn">Limpiar</button>
+          </div>
+        </div>
+        <textarea id="input" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off"
+          placeholder="Pega aquí tu script de Lua o arrastra un archivo .lua"></textarea>
+      </div>
+
+      <div class="pane">
+        <div class="pane-head">
+          <h2>HScript</h2>
+          <div class="actions">
+            <button type="button" id="copy" class="btn">Copiar</button>
+            <button type="button" id="download" class="btn primary">Descargar</button>
+          </div>
+        </div>
+        <textarea id="output" spellcheck="false" readonly placeholder="Aquí aparece el resultado"></textarea>
+      </div>
+    </section>
+
+    <section id="status" class="status" aria-live="polite"></section>
+  </main>
+
+  <footer class="foot">
+    <p>La conversión es automática y no sustituye a probar el script en el juego. Revisa siempre los avisos.
+      El perfil de Psych Engine es un punto de partida: cubre sintaxis, callbacks y las funciones más comunes.</p>
+  </footer>
+
+  <script src="src/lua2hx.js"></script>
+  <script src="src/profiles.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
